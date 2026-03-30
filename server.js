@@ -341,7 +341,7 @@ io.on('connection', (socket) => {
 });
 
 // --- Start server ---
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 server.listen(PORT, '0.0.0.0', () => {
   const localIP = getLocalIP();
   const url = `http://${localIP}:${PORT}`;
