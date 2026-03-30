@@ -1,5 +1,7 @@
 // --- Connection ---
-const socket = io();
+const socket = io(window.location.origin, {
+  transports: ['websocket', 'polling'],
+});
 const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 
@@ -83,9 +85,7 @@ socket.on('disconnect', () => {
 // --- QR code generation (P1 only) ---
 function showQRCode() {
   if (myPlayerId !== 1) return;
-  const host = window.location.hostname;
-  const port = window.location.port;
-  const p2url = `http://${host}:${port}/?player=2`;
+  const p2url = `${window.location.origin}/?player=2`;
 
   qrSection.style.display = 'block';
   document.getElementById('p2-url').textContent = p2url;

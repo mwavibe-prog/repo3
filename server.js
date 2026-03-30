@@ -6,9 +6,18 @@ const qrcode = require('qrcode-terminal');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST'],
+  },
+  transports: ['websocket', 'polling'],
+});
 
 app.use(express.static('public'));
+
+// Health check for Railway
+app.get('/health', (req, res) => res.send('ok'));
 
 // --- Game constants ---
 const CANVAS_W = 400;
