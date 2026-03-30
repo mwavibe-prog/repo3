@@ -1,0 +1,14 @@
+{
+  "name": "crew-overboard",
+  "version": "1.0.0",
+  "description": "Multiplayer boat survival game — dodge obstacles, survive the ocean!",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "qrcode-terminal": "^0.12.0",
+    "socket.io": "^4.7.4"
+  }
+}
