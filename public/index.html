@@ -130,9 +130,18 @@
   <div id="player-badge" class="player-badge">Connecting...</div>
   <div id="status" class="status dot-anim">Connecting to server</div>
   <div id="qr-section" style="display:none; text-align:center;">
-    <p style="color:#8899aa; margin-bottom:0.5rem;">Player 2: scan to join</p>
+    <p style="color:#8899aa; margin-bottom:0.5rem;">Player 2: scan QR code or share this link</p>
     <div id="qr-container"><canvas id="qr-canvas"></canvas></div>
-    <div id="p2-url" class="url-display"></div>
+    <div id="p2-url" class="url-display" style="
+      background: rgba(255,255,255,0.1);
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: #4a9eff;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 0.75rem;
+    " onclick="navigator.clipboard.writeText(this.textContent).then(()=>{this.style.color='#44ff44';this.dataset.orig=this.textContent;this.textContent='Copied!';setTimeout(()=>{this.textContent=this.dataset.orig;this.style.color='#4a9eff'},1500)})"></div>
+    <p style="color:#556; font-size:0.75rem; margin-top:0.4rem;">Tap link to copy</p>
   </div>
   <div id="full-screen">
     <p style="color:#aaa; font-size:0.9rem;">Game server is full.</p>
