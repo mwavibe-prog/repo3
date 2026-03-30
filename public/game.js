@@ -83,34 +83,13 @@ socket.on('disconnect', () => {
 });
 
 // --- QR code generation (P1 only) ---
-let qrGenerated = false;
-
 function showQRCode() {
   if (myPlayerId !== 1) return;
   const p2url = `${window.location.origin}/?player=2`;
 
   qrSection.style.display = 'block';
   document.getElementById('p2-url').textContent = p2url;
-
-  if (qrGenerated) return;
-
-  const qrCanvas = document.getElementById('qr-canvas');
-
-  function tryGenerateQR() {
-    if (typeof QRCode !== 'undefined') {
-      QRCode.toCanvas(qrCanvas, p2url, {
-        width: 200,
-        margin: 1,
-        color: { dark: '#0a1628', light: '#ffffff' },
-      }, (err) => {
-        if (!err) qrGenerated = true;
-      });
-    } else {
-      // CDN not loaded yet, retry
-      setTimeout(tryGenerateQR, 500);
-    }
-  }
-  tryGenerateQR();
+  document.getElementById('qr-img').src = '/qr';
 }
 
 // --- Input handling ---

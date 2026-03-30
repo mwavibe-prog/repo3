@@ -3,6 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const os = require('os');
 const qrcode = require('qrcode-terminal');
+const QRCode = require('qrcode');
 
 const app = express();
 const server = http.createServer(app);
@@ -18,6 +19,26 @@ app.use(express.static('public'));
 
 // Health check for Railway
 app.get('/health', (req, res) => res.send('ok'));
+
+// Server-side QR code generation
+app.get('/qr', async (req, res) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  const host = req.headers['x-forwarded-host'] || req.headers.host;
+  const p2url = `${protocol}://${host}/?player=2`;
+  try {
+    const dataUrl = await QRCode.toDataURL(p2url, {
+      width: 250,
+      margin: 2,
+      color: { dark: '#0a1628', light: '#ffffff' },
+    });
+    const base64 = dataUrl.replace(/^data:image\/png;base64,/, '');
+    const img = Buffer.from(base64, 'base64');
+    res.set('Content-Type', 'image/png');
+    res.send(img);
+  } catch (err) {
+    res.status(500).send('QR generation failed');
+  }
+});
 
 // --- Game constants ---
 const CANVAS_W = 400;

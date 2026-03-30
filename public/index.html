@@ -131,7 +131,7 @@
   <div id="status" class="status dot-anim">Connecting to server</div>
   <div id="qr-section" style="display:none; text-align:center;">
     <p style="color:#8899aa; margin-bottom:0.5rem;">Player 2: scan QR code or share this link</p>
-    <div id="qr-container"><canvas id="qr-canvas"></canvas></div>
+    <div id="qr-container"><img id="qr-img" alt="QR Code" width="250" height="250" /></div>
     <div id="p2-url" class="url-display" style="
       background: rgba(255,255,255,0.1);
       padding: 10px 16px;
@@ -155,8 +155,6 @@
   <button id="btn-right" aria-label="Move right">&#9654;</button>
 </div>
 
-<!-- QR code library (lightweight, self-contained) -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script src="game.js"></script>
 </body>
